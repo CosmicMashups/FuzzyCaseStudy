@@ -19,7 +19,7 @@ function getMembership(variable: keyof InputValues, set: string, value: number):
     case 'suicidalRisk':
       if (set === 'None') return trimf(value, 0, 0.5, 1)
       if (set === 'Some') return trimf(value, 1, 3.5, 6)
-      if (set === 'High') return trimf(value, 5, 7.5, 10)
+      if (set === 'High') return trapmf(value, 5, 7.5, 10, 11)
       break
     case 'symptomDuration':
       if (set === 'Short') return trimf(value, 0, 1, 2)
