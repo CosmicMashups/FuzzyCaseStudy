@@ -6,7 +6,7 @@ import { RuleEvaluationView } from './components/RuleEvaluationView'
 import { ConsequentActivationView } from './components/ConsequentActivationView'
 import { AggregationView } from './components/AggregationView'
 import { DefuzzificationView } from './components/DefuzzificationView'
-import { ActionLevelGauge } from './components/ActionLevelGauge'
+import { ActionLevelBar } from './components/ActionLevelBar'
 import { StepExplanationPanel } from './components/StepExplanationPanel'
 import { useSimulatorStore } from './store/useSimulatorStore'
 import { computeFuzzyResult } from './fuzzy/fuzzyEngine'
@@ -59,9 +59,10 @@ function StepContent() {
         <div className="space-y-4">
           <h3 className="text-lg font-semibold text-slate-200">Step 7: Final output</h3>
           <p className="text-sm text-slate-400">
-            The defuzzified Action Level and recommended action are shown below in the gauge panel.
+            The defuzzified Action Level is shown below. The bar indicates the crisp value and all
+            overlapping action levels with their membership strengths.
           </p>
-          <ActionLevelGauge crispOutput={result.crispOutput} decision={result.decision} />
+          <ActionLevelBar crispOutput={result.crispOutput} />
         </div>
       )
     default:
@@ -112,10 +113,10 @@ export default function App() {
 
       <footer className="border-t border-slate-700 bg-slate-800/80 px-4 py-3">
         <div className="mx-auto max-w-4xl">
-          <ActionLevelGauge crispOutput={result.crispOutput} decision={result.decision} />
+          <ActionLevelBar crispOutput={result.crispOutput} />
           {step === 7 && (
             <p className="mt-2 text-sm text-slate-500">
-              Recommended action: {result.decision}
+              Overlapping action levels reflect fuzzy membership at the crisp output value.
             </p>
           )}
         </div>
